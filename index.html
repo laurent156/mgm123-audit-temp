@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Audit site web mgm123</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* VOICE: Laurent Van Ausloos, direct, calme, éditorial — un rapport d'expert, pas une plaquette.
+   IDEA: le compte-rendu d'un partenaire créatif : verdict d'abord, preuves ensuite, plan pour finir.
+   PICTURE: le tableau de bord PageSpeed mobile vs bureau, grand, dans le bandeau nuit.
+   COLOUR and TYPE: tokens laurentvanausloos.be — papier #f2efe9, encre #0a0a0a, nuit #111, accent beige #d9b7a0 / #644835. Geist 500 serré + Roboto Mono pour les libellés.
+   LAYOUT: bandeau nuit plein cadre, puis sections papier à 2 colonnes (titre / contenu), feuille de route en 3 colonnes. */
+:root{color-scheme:light dark;
+--paper:light-dark(#f2efe9,#111111);--raised:light-dark(#ffffff,#181818);--deep:light-dark(#e4dfd7,#1f1f1f);
+--ink:light-dark(#0a0a0a,#f2efe9);--sec:light-dark(#4d4a45,#cac2b6);--muted:light-dark(#66625c,#ada89f);
+--hair:light-dark(#e0d8cd,#292929);--accent:light-dark(#644835,#d9b7a0);
+--danger:light-dark(#8f2f2f,#e08a7e);--danger-soft:light-dark(#f6e9e7,#2a1a18);
+--warn:light-dark(#8a5a12,#e3b56a);--warn-soft:light-dark(#f6eedd,#2a2216);
+--ok:light-dark(#3d6b4a,#8cc49b);--ok-soft:light-dark(#e9f0ea,#16241a);
+--night:#111111;--night2:#181818;--night3:#1f1f1f;--sand:#d9b7a0;
+--sans:Geist,"Helvetica Neue",Arial,sans-serif;--mono:"Roboto Mono",ui-monospace,monospace;
+--ease:cubic-bezier(.16,1,.3,1)}
+:root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
+*{box-sizing:border-box;min-width:0}
+html{scroll-padding-top:72px}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 17px/1.55 var(--sans);letter-spacing:-.02em;overflow-x:clip;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.wrap{max-width:1240px;margin:0 auto;padding:0 max(5vw,16px)}
+.lbl{font:500 12px/1.4 var(--mono);letter-spacing:.04em;text-transform:uppercase;color:var(--muted)}
+h1,h2,h3{font-weight:500;margin:0;text-wrap:balance}
+h2{font-size:clamp(32px,4.4vw,52px);line-height:1.02;letter-spacing:-.04em}
+h3{font-size:22px;line-height:1.15;letter-spacing:-.03em}
+p{margin:0 0 .9em;max-width:66ch;color:var(--sec)}
+strong{color:var(--ink);font-weight:500}
+
+/* top */
+.top{background:var(--night);color:#fff;position:sticky;top:0;z-index:5;border-bottom:1px solid rgba(255,255,255,.1)}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;height:56px}
+.top b{font-weight:500;font-size:15px}
+.nav{display:flex;gap:4px;overflow-x:auto}
+.nav a{flex:none;text-decoration:none;font-size:14px;font-weight:500;color:#a0a0a0;padding:8px 10px;border-radius:4px}
+.nav a:hover,.nav a:focus-visible{color:#fff;background:rgba(255,255,255,.08);outline:none}
+
+/* hero */
+.hero{background:var(--night);color:#fff;padding:clamp(40px,6vw,88px) 0 clamp(48px,6vw,96px)}
+.hero .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:clamp(28px,4vw,64px);align-items:end}
+.hero .lbl{color:#808080;margin-bottom:22px}
+.hero h1{font-size:clamp(44px,6.4vw,84px);line-height:.95;letter-spacing:-.045em}
+.hero h1 span{color:var(--sand)}
+.hero p{color:#a0a0a0;font-size:19px;margin-top:26px}
+.meta{display:flex;flex-wrap:wrap;gap:8px 22px;margin-top:22px;font:400 13px var(--mono);color:#808080}
+
+.board{background:var(--night2);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:22px}
+.board-h{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:18px}
+.board-h .lbl{margin:0;color:#808080}
+.devs{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.dev{background:var(--night3);border-radius:8px;padding:18px}
+.dev .lbl{color:#a0a0a0;margin-bottom:14px}
+.big{display:flex;align-items:center;gap:14px;margin-bottom:16px}
+.ring{width:84px;height:84px;flex:none}
+.ring .t{font:500 26px var(--sans);fill:#fff;letter-spacing:-.04em}
+.big small{display:block;color:#a0a0a0;font-size:13px;line-height:1.35}
+.rows{display:grid;gap:7px}
+.row{display:flex;justify-content:space-between;gap:10px;font-size:14px;color:#cacaca;border-top:1px solid rgba(255,255,255,.07);padding-top:7px}
+.row b{font:500 14px var(--mono);white-space:nowrap}
+.g{color:#8cc49b}.o{color:#e3b56a}.r{color:#e08a7e}
+.lcp{margin-top:18px;background:var(--night3);border-radius:8px;padding:18px}
+.lcp .lbl{color:#a0a0a0;margin-bottom:12px}
+.bar{display:grid;grid-template-columns:5.5em minmax(0,1fr) 3.4em;align-items:center;gap:10px;font-size:13px;color:#cacaca;margin-top:8px}
+.bar i{display:block;height:10px;border-radius:999px;background:rgba(255,255,255,.12);position:relative;overflow:hidden}
+.bar i::after{content:"";position:absolute;inset:0 auto 0 0;width:var(--w);background:var(--c);border-radius:999px;transform-origin:left;animation:grow 1s var(--ease) both}
+.bar b{font:500 13px var(--mono);text-align:right;white-space:nowrap}
+.thr{font-size:12px;color:#808080;margin-top:10px}
+@keyframes grow{from{transform:scaleX(0)}}
+@media (prefers-reduced-motion:reduce){.bar i::after{animation:none}}
+
+/* sections */
+section.band{padding:clamp(48px,7vw,104px) 0;border-top:1px solid var(--hair)}
+.split{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,8fr);gap:clamp(24px,4vw,64px)}
+.split>div:first-child .lbl{margin-bottom:14px}
+.lead{font-size:clamp(20px,2vw,24px);line-height:1.35;color:var(--ink);letter-spacing:-.03em;max-width:40ch;margin-bottom:28px}
+
+.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.card{background:var(--raised);border:1px solid var(--hair);border-radius:10px;padding:20px 20px 16px}
+.card .n{font:500 12px var(--mono);color:var(--accent);margin-bottom:10px}
+.card h3{font-size:19px;margin-bottom:8px}
+.card p{font-size:15px;margin:0}
+
+table{width:100%;border-collapse:collapse;font-size:15px}
+th{font:500 11px/1.4 var(--mono);text-transform:uppercase;letter-spacing:.04em;color:var(--muted);text-align:left;padding:0 12px 10px 0;border-bottom:1px solid var(--ink)}
+td{padding:13px 12px 13px 0;border-bottom:1px solid var(--hair);vertical-align:top;color:var(--sec)}
+td:first-child{color:var(--ink);font-weight:500;white-space:nowrap}
+.tag{display:inline-block;font:500 12px var(--mono);padding:3px 8px;border-radius:999px;white-space:nowrap}
+.hi{background:var(--danger-soft);color:var(--danger)}.mid{background:var(--warn-soft);color:var(--warn)}.lo{background:var(--ok-soft);color:var(--ok)}
+
+.list{list-style:none;margin:0;padding:0;display:grid;gap:0}
+.list li{display:grid;grid-template-columns:1.6em minmax(0,1fr);gap:10px;padding:14px 0;border-bottom:1px solid var(--hair);color:var(--sec);font-size:16px}
+.list li::before{content:"—";color:var(--accent)}
+.list li:first-child{border-top:1px solid var(--hair)}
+
+.two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:28px}
+.box{background:var(--raised);border:1px solid var(--hair);border-radius:10px;padding:22px}
+.box h3{margin-bottom:12px}
+.box .list li{font-size:15px;padding:10px 0}
+.code{font:400 13px/1.5 var(--mono);color:var(--accent)}
+
+.road{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:8px}
+.col{background:var(--raised);border:1px solid var(--hair);border-radius:10px;padding:22px}
+.col.p1{background:var(--night);color:#fff;border-color:var(--night)}
+.col.p1 .list li{color:#cacaca;border-color:rgba(255,255,255,.1)}
+.col.p1 .list li::before{color:var(--sand)}
+.col.p1 .lbl{color:var(--sand)}
+.col .lbl{margin-bottom:6px}
+.col h3{margin-bottom:14px}
+
+.kpis{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+.kpis span{font-size:14px;border:1px solid var(--hair);background:var(--raised);border-radius:999px;padding:7px 14px;color:var(--sec)}
+
+.checks{list-style:none;margin:0;padding:0;columns:2;column-gap:32px}
+.checks li{break-inside:avoid;display:flex;gap:12px;padding:12px 0;border-bottom:1px solid var(--hair);font-size:15px;color:var(--sec)}
+.checks li::before{content:"";flex:none;width:16px;height:16px;margin-top:3px;border:1.5px solid var(--muted);border-radius:4px}
+
+footer{background:var(--night);color:#808080;padding:40px 0;font-size:14px}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
+footer b{color:#fff;font-weight:500}
+.src{font-size:13px;color:var(--muted);margin-top:22px;max-width:none}
+.src a{color:var(--muted)}
+
+@media(max-width:960px){.hero .wrap{grid-template-columns:1fr;align-items:start}.split{grid-template-columns:1fr}.road{grid-template-columns:1fr}}
+@media(max-width:640px){.cards,.two{grid-template-columns:1fr}.devs{grid-template-columns:1fr}.checks{columns:1}.top b{display:none}.board{padding:14px}}
+@media(max-width:600px){table{font-size:13px}.stack thead{display:none}.stack tr{display:grid;padding-block:10px;border-bottom:1px solid var(--hair)}.stack td{display:flow-root;border:0;padding:3px 0;padding-inline-start:7em;text-align:start;white-space:normal}.stack td::before{content:attr(data-l);float:inline-start;width:6.5em;margin-inline-start:-7em;font:500 11px/1.6 var(--mono);text-transform:uppercase;color:var(--muted)}.stack td:empty{display:none}}
+</style>
+<script>new MutationObserver(()=>{for(const c of document.querySelectorAll('.stack td:not([data-l])')){let i=0,p=c;while(p=p.previousElementSibling)i+=p.colSpan;c.dataset.l=c.closest('table').rows[0].cells[i]?.textContent||''}}).observe(document,{childList:true,subtree:true})</script>
+</head>
+<body>
+
+<header class="top"><div class="wrap">
+  <b>Laurent Van Ausloos</b>
+  <nav class="nav" aria-label="Sections">
+    <a href="#verdict">Synthèse</a><a href="#perf">Vitesse</a><a href="#seo">Google</a><a href="#geo">IA</a><a href="#ux">Image</a><a href="#rdv">Rendez-vous</a><a href="#plan">Plan</a>
+  </nav>
+</div></header>
+
+<div class="hero"><div class="wrap">
+  <div>
+    <div class="lbl">Groupement médical 123 · Saint-Gilles</div>
+    <h1>Audit de votre site web <span>MGM 123.</span></h1>
+    <div class="meta"><span>mgm123.webnode.be</span><span>25 novembre 2026</span><span>PageSpeed · Lighthouse 13.6</span></div>
+  </div>
+  <div class="board" aria-label="Scores PageSpeed">
+    <div class="board-h"><span class="lbl">PageSpeed Insights</span><span class="lbl">Mobile vs bureau</span></div>
+    <div class="devs" id="devs"></div>
+    <div class="lcp">
+      <div class="lbl">Temps d'affichage de la page · smartphone</div>
+      <div class="bar"><span>Aujourd'hui</span><i style="--w:96.7%;--c:#e08a7e"></i><b class="r">5,8 s</b></div>
+      <div class="bar"><span>Seuil Google</span><i style="--w:41.7%;--c:#e3b56a"></i><b>2,5 s</b></div>
+      <div class="bar"><span>Nouveau site</span><i style="--w:33.3%;--c:#8cc49b"></i><b class="g">2,0 s</b></div>
+      <div class="thr">Mesure Google PageSpeed, connexion 4G lente, 25 novembre 2026.</div>
+    </div>
+  </div>
+</div></div>
+
+<main>
+<section class="band" id="verdict"><div class="wrap split">
+  <div><div class="lbl">Synthèse</div><h2>Six points qui comptent.</h2></div>
+  <div>
+    <p class="lead">Votre site fonctionne correctement sur ordinateur. Mais il ne permet pas encore à vos patients de prendre rendez-vous en ligne ni de découvrir votre équipe, et il reste peu visible sur smartphone et dans les recherches.</p>
+    <div class="cards" id="cards"></div>
+  </div>
+</div></section>
+
+<section class="band" id="perf"><div class="wrap split">
+  <div><div class="lbl">Vitesse</div><h2>Rapide sur ordinateur, lent sur smartphone.</h2></div>
+  <div>
+    <p class="lead">La plupart des patients cherchent un médecin depuis leur téléphone. Sur smartphone, votre page d'accueil met 5,8 secondes à s'afficher, plus du double de ce que Google considère comme bon.</p>
+    <ul class="list">
+      <li><span><strong>Photo d'accueil trop lourde.</strong> La photo de la façade n'est pas optimisée pour le mobile : c'est le principal facteur de lenteur.</span></li>
+      <li><span><strong>Limites de la plateforme Webnode.</strong> Elle charge ses propres fichiers, qu'il n'est pas possible d'alléger.</span></li>
+      <li><span><strong>Lisibilité.</strong> Score d'accessibilité de 80/100 sur mobile : texte blanc sur photo sombre et images sans description pour les lecteurs d'écran. Un point important pour une patientèle de tous âges.</span></li>
+    </ul>
+    <div class="kpis"><span>Score mobile ≥ 95</span><span>Affichage &lt; 2 s</span><span>Accessibilité 100/100</span></div>
+  </div>
+</div></section>
+
+<section class="band" id="seo"><div class="wrap split">
+  <div><div class="lbl">Référencement Google</div><h2>De bonnes bases, un potentiel inexploité.</h2></div>
+  <div>
+    <p class="lead">Google trouve bien votre site. Mais plusieurs éléments limitent sa visibilité, notamment quand un patient cherche « médecin généraliste Saint-Gilles ».</p>
+    <table class="stack"><thead><tr><th>Sujet</th><th>Aujourd'hui</th><th>Impact</th><th>Avec le nouveau site</th></tr></thead><tbody id="seo-t"></tbody></table>
+    <div class="two">
+      <div class="box"><h3>Recherches locales à viser</h3><ul class="list"><li>médecin généraliste Saint-Gilles</li><li>huisarts Sint-Gillis</li><li>groupement médical Saint-Gilles</li></ul></div>
+      <div class="box"><h3>Votre atout : neuf langues</h3><ul class="list"><li>English speaking GP Saint-Gilles</li><li>médico de cabecera español Bruselas</li><li>lekarz rodzinny Bruksela</li></ul></div>
+    </div>
+  </div>
+</div></section>
+
+<section class="band" id="geo"><div class="wrap split">
+  <div><div class="lbl">Assistants IA</div><h2>Être recommandé par ChatGPT et les assistants IA.</h2></div>
+  <div>
+    <p class="lead">De plus en plus de patients demandent directement à une IA : « Quel médecin parle espagnol à Saint-Gilles ? ». Aujourd'hui, ces outils ne peuvent pas lire clairement vos informations : médecins, langues, horaires, garde.</p>
+    <div class="two" style="margin-top:0">
+      <div class="box"><h3>Ce qui manque aujourd'hui</h3><ul class="list">
+        <li>Informations non structurées pour les machines</li><li>Pas de questions fréquentes</li><li>Pas de page par médecin</li><li>Informations différentes selon les sites (Google, annuaires)</li></ul></div>
+      <div class="box"><h3>Ce que prévoit le nouveau site</h3><ul class="list">
+        <li>Fiche structurée du cabinet : horaires, langues, adresse</li>
+        <li>Une fiche par médecin, avec ses langues</li>
+        <li>Questions fréquentes en FR, NL et EN</li>
+        <li>Accès ouvert aux assistants IA</li>
+        <li>Mêmes informations partout : Google, Apple, annuaires</li></ul></div>
+    </div>
+  </div>
+</div></section>
+
+<section class="band" id="ux"><div class="wrap split">
+  <div><div class="lbl">Image</div><h2>Une image à la hauteur de votre équipe.</h2></div>
+  <div>
+    <p class="lead">En quelques secondes, un patient doit percevoir un cabinet sérieux et accueillant, et pouvoir réserver tout de suite.</p>
+    <div class="two" style="margin-top:0">
+      <div class="box"><h3>À corriger</h3><ul class="list">
+        <li>Bannière publicitaire Webnode en bas de page</li><li>Photo de façade sombre et peu nette</li><li>Logo et illustrations génériques</li><li>Page COVID-19 et pages en construction dans le menu</li><li>Français et néerlandais sur la même page</li></ul></div>
+      <div class="box"><h3>Ce que nous proposons</h3><ul class="list">
+        <li>Un design sobre, chaleureux et très lisible</li><li>De vraies photos : façade, accueil, équipe</li><li>Un bouton « Prendre rendez-vous » toujours visible</li><li>L'équipe présentée avec photos et langues parlées</li><li>Un choix de langue FR / NL / EN</li><li>Les numéros de garde clairement affichés : 112 et 1733</li></ul></div>
+    </div>
+  </div>
+</div></section>
+
+<section class="band" id="rdv"><div class="wrap split">
+  <div><div class="lbl">Prise de rendez-vous</div><h2>Réserver en ligne, en quelques clics.</h2></div>
+  <div>
+    <p class="lead">Nous recommandons de connecter le site à une plateforme de réservation médicale reconnue. Elle gère déjà la protection des données de santé, les rappels par SMS et les annulations.</p>
+    <table class="stack"><thead><tr><th>Option</th><th>Avantages</th><th>Points d'attention</th></tr></thead><tbody id="rdv-t"></tbody></table>
+    <p class="src">Le téléphone du secrétariat reste visible pour les patients qui préfèrent appeler.</p>
+  </div>
+</div></section>
+
+<section class="band" id="plan"><div class="wrap">
+  <div class="split" style="margin-bottom:28px">
+    <div><div class="lbl">Plan de refonte</div><h2>Rapide, trilingue, simple à gérer.</h2></div>
+    <p class="lead" style="margin:0">Un nouveau site sur votre propre nom de domaine, en français, néerlandais et anglais, avec la réservation intégrée. Votre secrétariat pourra mettre à jour horaires et absences en quelques minutes.</p>
+  </div>
+  <div class="road" id="road"></div>
+</div></section>
+</main>
+
+<footer><div class="wrap"><span><b>Laurent Van Ausloos</b> · Freelance creative partner · Bruxelles</span><span>laurentvanausloos.be</span></div></footer>
+
+<script>
+{
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const col=v=>v>=90?'#8cc49b':v>=50?'#e3b56a':'#e08a7e';
+const ring=v=>{const r=34,C=2*Math.PI*r,o=C*(1-v/100);return `<svg class="ring" viewBox="0 0 84 84" role="img" aria-label="Score ${v} sur 100"><circle cx="42" cy="42" r="${r}" fill="none" stroke="rgba(255,255,255,.1)" stroke-width="6"/><circle cx="42" cy="42" r="${r}" fill="none" stroke="${col(v)}" stroke-width="6" stroke-linecap="round" stroke-dasharray="${C.toFixed(1)}" stroke-dashoffset="${o.toFixed(1)}" transform="rotate(-90 42 42)"/><text class="t" x="42" y="51" text-anchor="middle">${v}</text></svg>`};
+const devs=[
+ {n:'Mobile',p:70,note:'Performance<br>Moto G Power, 4G lente',m:[['Accessibilité','80','o'],['Bonnes pratiques','100','g'],['SEO','92','g'],['FCP','2,7 s','o'],['Speed Index','5,3 s','o']]},
+ {n:'Bureau',p:99,note:'Performance<br>Ordinateur',m:[['Accessibilité','91','g'],['Bonnes pratiques','100','g'],['SEO','92','g'],['FCP','0,6 s','g'],['LCP','0,9 s','g']]}];
+document.getElementById('devs').innerHTML=devs.map(d=>`<div class="dev"><div class="lbl">${d.n}</div><div class="big">${ring(d.p)}<small>${d.note}</small></div><div class="rows">${d.m.map(x=>`<div class="row"><span>${x[0]}</span><b class="${x[2]}">${x[1]}</b></div>`).join('')}</div></div>`).join('');
+
+const cards=[
+ ['Rendez-vous uniquement par téléphone','Le secrétariat est joignable en semaine jusqu\'à 17h, alors que vous consultez jusqu\'à 19h et le samedi. La réservation en ligne étendrait l\'accès à toute heure.'],
+ ['Pas de nom de domaine propre','Le site est hébergé sur une adresse Webnode avec une bannière publicitaire. Un domaine à votre nom renforce la confiance et le référencement.'],
+ ['Pages encore en construction','« Notre équipe » et « Garde » sont vides. Le numéro de garde 1733 n\'apparaît pas encore.'],
+ ['Contenu à mettre à jour','Page COVID-19 dans le menu, nombre de médecins à harmoniser (11 annoncés, 14 présentés), quelques coquilles en FR et en NL.'],
+ ['Neuf langues à valoriser','FR, NL, EN, ES, DE, BG, RU, PL et lingala : un vrai atout pour Saint-Gilles, encore peu visible en ligne.'],
+ ['Réservation à centraliser','Certains médecins sont déjà présents sur une plateforme de réservation. Le site pourrait réunir toute l\'équipe en un seul endroit.']];
+document.getElementById('cards').innerHTML=cards.map((c,i)=>`<div class="card"><div class="n">${String(i+1).padStart(2,'0')}</div><h3>${esc(c[0])}</h3><p>${esc(c[1])}</p></div>`).join('');
+
+const imp={H:['Élevé','hi'],M:['Moyen','mid'],L:['Faible','lo']};
+const seo=[
+ ['Adresse du site','Sous-domaine Webnode','H','Votre propre nom de domaine'],
+ ['Langues','Français et néerlandais sur la même page','H','Une version par langue : FR, NL, EN'],
+ ['Contenu','Services listés sans description ; 2 pages vides','H','Une page par service et par médecin'],
+ ['Informations pour Google','Horaires, langues et médecins non structurés','H','Fiche cabinet et fiches médecins structurées'],
+ ['Titres des pages','Plusieurs titres principaux sur l\'accueil','M','Une structure claire par page'],
+ ['Descriptions Google','Accueil : uniquement l\'adresse','M','Un texte d\'accroche par page et par langue'],
+ ['Images','Sans description','M','Images décrites et optimisées'],
+ ['Coordonnées','Absentes du bas de page','M','Adresse et téléphone sur chaque page']];
+document.getElementById('seo-t').innerHTML=seo.map(r=>`<tr><td>${esc(r[0])}</td><td>${esc(r[1])}</td><td><span class="tag ${imp[r[2]][1]}">${imp[r[2]][0]}</span></td><td>${esc(r[3])}</td></tr>`).join('');
+
+const rdv=[
+ ['Plateforme de réservation médicale','Intégrée au site ; rappels SMS ; réservation par médecin et par langue ; visibilité supplémentaire','Abonnement mensuel par médecin'],
+ ['Module de votre logiciel médical','Un seul agenda, sans double saisie','Selon le logiciel, interface patient plus limitée']];
+document.getElementById('rdv-t').innerHTML=rdv.map(r=>`<tr><td>${esc(r[0])}</td><td>${esc(r[1])}</td><td>${esc(r[2])}</td></tr>`).join('');
+
+const road=[
+ ['p1','Étape 1','Les fondations',['Votre nom de domaine','Prise de rendez-vous en ligne','Page garde et urgences : 112 et 1733','Fiche Google du cabinet complétée']],
+ ['','Étape 2','Votre image',['Une page par médecin','Séance photo et identité rafraîchie','Questions fréquentes en FR, NL et EN']],
+ ['','Étape 3','La visibilité',['Pages détaillées par service','Optimisation pour les assistants IA','Suivi des rendez-vous en ligne et des visites']]];
+document.getElementById('road').innerHTML=road.map(c=>`<div class="col ${c[0]}"><div class="lbl">${c[1]}</div><h3>${c[2]}</h3><ul class="list">${c[3].map(x=>`<li>${esc(x)}</li>`).join('')}</ul></div>`).join('');
+
+}
+</script>
+</body>
+</html>
